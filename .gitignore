@@ -23,11 +23,6 @@ ipch/
 .cache/
 compile_commands.json
 
-/Relay/log.txt
-/Relay/data
-/Relay/data_config
-/Relay/DebugLogs/
-/Relay/tdata/
 /Relay/tdumps/
 
 .DS_Store
