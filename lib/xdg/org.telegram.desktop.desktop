@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Telegram
+Name=Relay
 Comment=New era of messaging
-TryExec=Telegram
-Exec=Telegram -- %U
-Icon=org.telegram.desktop
+TryExec=Relay
+Exec=Relay -- %U
+Icon=org.theonixos.relay
 Terminal=false
 StartupWMClass=TelegramDesktop
 Type=Application
@@ -17,6 +17,6 @@ X-GNOME-UsesNotifications=true
 X-GNOME-SingleWindow=true
 
 [Desktop Action quit]
-Exec=Telegram -quit
-Name=Quit Telegram
+Exec=Relay -quit
+Name=Quit Relay
 Icon=application-exit

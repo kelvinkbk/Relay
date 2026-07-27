@@ -1,6 +1,6 @@
 name: telegram-desktop
 adopt-info: telegram
-icon: Telegram/Resources/art/icon512@2x.png
+icon: Relay/Resources/art/icon512@2x.png
 
 base: core24
 grade: stable
@@ -56,7 +56,7 @@ parts:
     override-pull: |
       craftctl default
 
-      version_file=Telegram/build/version
+      version_file=Relay/build/version
       version=$(sed -n "s/AppVersionStr[ ]\+\(.*\)\+/\1/p" $version_file)
       beta=$(sed -n "s/BetaChannel[ ]\+\(.*\)\+/\1/p" $version_file)
 
@@ -69,7 +69,7 @@ parts:
       craftctl set version="$version"
     override-build: |
       craftctl default
-      "$CRAFT_PART_SRC/Telegram/build/minidebug.sh" "$CRAFT_PART_INSTALL/usr/bin/Telegram"
+      "$CRAFT_PART_SRC/Relay/build/minidebug.sh" "$CRAFT_PART_INSTALL/usr/bin/Telegram"
       mv "$CRAFT_PART_INSTALL"/usr/bin/{Telegram,telegram-desktop}
 
       APP_ID=org.telegram.desktop

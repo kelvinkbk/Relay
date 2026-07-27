@@ -2,12 +2,12 @@
 Debug/
 Release/
 /ThirdParty/
-/Telegram/build/target
-/Telegram/build/ai-machine-tag
-/Telegram/tests/
-/Telegram/gyp/tests/*.test
-/Telegram/out/
-/Telegram/*.user
+/Relay/build/target
+/Relay/build/ai-machine-tag
+/Relay/tests/
+/Relay/gyp/tests/*.test
+/Relay/out/
+/Relay/*.user
 *.vcxproj*
 *.sln
 *.suo
@@ -23,12 +23,12 @@ ipch/
 .cache/
 compile_commands.json
 
-/Telegram/log.txt
-/Telegram/data
-/Telegram/data_config
-/Telegram/DebugLogs/
-/Telegram/tdata/
-/Telegram/tdumps/
+/Relay/log.txt
+/Relay/data
+/Relay/data_config
+/Relay/DebugLogs/
+/Relay/tdata/
+/Relay/tdumps/
 
 .DS_Store
 ._*
@@ -46,11 +46,11 @@ stage
 /snap/gui/*.desktop
 /snap/plugins/__pycache__
 
-/Telegram/*.user.*
+/Relay/*.user.*
 *.txt.user
 *.pro.user
 /Linux/
-/Telegram/Makefile
+/Relay/Makefile
 *.*~
 .idea/
 cmake-build-debug/

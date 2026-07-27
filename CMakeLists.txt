@@ -10,16 +10,16 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 include(cmake/validate_special_target.cmake)
 include(cmake/version.cmake)
-desktop_app_parse_version(Telegram/build/version)
+desktop_app_parse_version(Relay/build/version)
 
 if (NOT DEFINED CMAKE_CONFIGURATION_TYPES)
     set(configuration_types_init 1)
 endif()
 
-project(Telegram
+project(Relay
     LANGUAGES C CXX
     VERSION ${desktop_app_version_cmake}
-    DESCRIPTION "Official Telegram Desktop messenger"
+    DESCRIPTION "Relay messaging application for TheonixOS"
     HOMEPAGE_URL "https://desktop.telegram.org"
 )
 
@@ -33,9 +33,9 @@ if (configuration_types_init
     set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES};MinSizeRel" CACHE STRING "" FORCE)
 endif()
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Telegram)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Relay)
 
-get_filename_component(third_party_loc "Telegram/ThirdParty" REALPATH)
+get_filename_component(third_party_loc "Relay/ThirdParty" REALPATH)
 get_filename_component(submodules_loc "Telegram" REALPATH)
 get_filename_component(cmake_helpers_loc "cmake" REALPATH)
 

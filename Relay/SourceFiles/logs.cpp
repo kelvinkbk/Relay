@@ -408,14 +408,7 @@ void start() {
 		return;
 	}
 
-#ifdef Q_OS_WIN
-	if (cWorkingDir() == psAppDataPath()) { // fix old "Telegram Win (Unofficial)" version
-		MoveOldDataFiles(psAppDataPathOld());
-	}
-#elif !defined Q_OS_MAC && !defined _DEBUG // fix first version
-	MoveOldDataFiles(launcher.initialWorkingDir());
-#endif
-
+	// Removed MoveOldDataFiles logic so Relay doesn't consume existing Telegram data
 	if (LogsInMemory) {
 		Assert(LogsInMemory != DeletedLogsInMemory);
 		LogsInMemoryList list = *LogsInMemory;

@@ -139,9 +139,9 @@ DeployPath="$ReleasePath/deploy/$AppVersionStrMajor/$AppVersionStrFull"
 
 if [ "$BuildTarget" == "linux" ]; then
 
-  DropboxSymbolsPath="/media/psf/Dropbox/Telegram/symbols"
+  DropboxSymbolsPath="/media/psf/Dropbox/Relay/symbols"
   if [ ! -d "$DropboxSymbolsPath" ]; then
-    DropboxSymbolsPath="/mnt/c/Telegram/Dropbox/Telegram/symbols"
+    DropboxSymbolsPath="/mnt/c/Relay/Dropbox/Relay/symbols"
     if [ ! -d "$DropboxSymbolsPath" ]; then
       Error "Dropbox path not found!"
     fi
@@ -149,13 +149,13 @@ if [ "$BuildTarget" == "linux" ]; then
 
   BackupPath="/media/psf/backup/tdesktop/$AppVersionStrMajor/$AppVersionStrFull/t$BuildTarget"
   if [ ! -d "/media/psf/backup/tdesktop" ]; then
-    BackupPath="/mnt/c/Telegram/Projects/backup/tdesktop/$AppVersionStrMajor/$AppVersionStrFull/t$BuildTarget"
-    if [ ! -d "/mnt/c/Telegram/Projects/backup/tdesktop" ]; then
+    BackupPath="/mnt/c/Relay/Projects/backup/tdesktop/$AppVersionStrMajor/$AppVersionStrFull/t$BuildTarget"
+    if [ ! -d "/mnt/c/Relay/Projects/backup/tdesktop" ]; then
       Error "Backup folder not found!"
     fi
   fi
 
-  ./build/docker/centos_env/run.sh /usr/src/tdesktop/Telegram/build/docker/build.sh
+  ./build/docker/centos_env/run.sh /usr/src/tdesktop/Relay/build/docker/build.sh
 
   echo "Copying from docker result folder."
   cp "$ReleasePath/root/$BinaryName" "$ReleasePath/$BinaryName"
@@ -224,7 +224,7 @@ fi
 
 if [ "$BuildTarget" == "mac" ] || [ "$BuildTarget" == "macstore" ]; then
 
-  DropboxSymbolsPath="$HOME/Dropbox/Telegram/symbols"
+  DropboxSymbolsPath="$HOME/Dropbox/Relay/symbols"
   if [ ! -d "$DropboxSymbolsPath" ]; then
     Error "Dropbox path not found!"
   fi
@@ -249,8 +249,8 @@ if [ "$BuildTarget" == "mac" ] || [ "$BuildTarget" == "macstore" ]; then
       if [ -f "$ReleasePath/$BinaryName.app/Contents/Info.plist" ]; then
         rm "$ReleasePath/$BinaryName.app/Contents/Info.plist"
       fi
-      if [ -f "$ProjectPath/Telegram/CMakeFiles/Telegram.dir/Info.plist" ]; then
-        rm "$ProjectPath/Telegram/CMakeFiles/Telegram.dir/Info.plist"
+      if [ -f "$ProjectPath/Relay/CMakeFiles/Telegram.dir/Info.plist" ]; then
+        rm "$ProjectPath/Relay/CMakeFiles/Telegram.dir/Info.plist"
       fi
       rm -rf "$ReleasePath/$BinaryName.app/Contents/_CodeSignature"
       rm -rf "$ReleasePath/Updater"
@@ -327,10 +327,10 @@ if [ "$BuildTarget" == "mac" ] || [ "$BuildTarget" == "macstore" ]; then
 
     echo "Signing the application.."
     if [ "$BuildTarget" == "mac" ]; then
-      codesign --force --deep --timestamp --options runtime --sign "Developer ID Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName" --entitlements "$HomePath/Telegram/Telegram.entitlements"
+      codesign --force --deep --timestamp --options runtime --sign "Developer ID Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName" --entitlements "$HomePath/Relay/Telegram.entitlements"
     elif [ "$BuildTarget" == "macstore" ]; then
-      codesign --force --timestamp --options runtime --sign "3rd Party Mac Developer Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName/Contents/Frameworks/Breakpad.framework/Versions/A/Resources/breakpadUtilities.dylib" --entitlements "$HomePath/Telegram/Breakpad.entitlements"
-      codesign --force --deep --timestamp --options runtime --sign "3rd Party Mac Developer Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName" --entitlements "$HomePath/Telegram/Telegram Lite.entitlements"
+      codesign --force --timestamp --options runtime --sign "3rd Party Mac Developer Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName/Contents/Frameworks/Breakpad.framework/Versions/A/Resources/breakpadUtilities.dylib" --entitlements "$HomePath/Relay/Breakpad.entitlements"
+      codesign --force --deep --timestamp --options runtime --sign "3rd Party Mac Developer Application: Telegram FZ-LLC (C67CF9S4VU)" "$ReleasePath/$BundleName" --entitlements "$HomePath/Relay/Telegram Lite.entitlements"
       echo "Making an installer.."
       productbuild --sign "3rd Party Mac Developer Installer: Telegram FZ-LLC (C67CF9S4VU)" --component "$ReleasePath/$BundleName" /Applications "$ReleasePath/$BinaryName.pkg"
     fi

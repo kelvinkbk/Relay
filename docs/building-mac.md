@@ -22,7 +22,7 @@ Go to ***BuildPath*** and run
     sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
     git clone --recursive https://github.com/telegramdesktop/tdesktop.git
-    ./tdesktop/Telegram/build/prepare/mac.sh
+    ./tdesktop/Relay/build/prepare/mac.sh
 
 ### Building the project
 

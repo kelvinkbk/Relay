@@ -51,7 +51,7 @@ consistent platform configuration:
 
 ```text
 native Windows: cmake --build ./out --config Debug --target Telegram
-WSL/Linux:      Telegram/build/docker/centos_env/build_debug.sh
+WSL/Linux:      Relay/build/docker/centos_env/build_debug.sh
 macOS/other:    AGENTS.md and the configured Debug tree
 
 EXE candidates:
@@ -401,7 +401,7 @@ planner into new unclaimed dated tasks before selecting more shared work.
   starting new shared work. A dirty/non-buildable checkout or global
   environment problem stops the current invocation.
 - A file-lock build error always stops immediately and asks the human to close
-  this checkout's Telegram/debugger.
+  this checkout's Relay/debugger.
 - A locked macOS session and the resulting unavailable Computer Use driver
   never stop or block the task; continue with the complete in-binary overlay
   flow.

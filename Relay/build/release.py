@@ -166,7 +166,7 @@ if access_token == '':
 print('Version: ' + version_full)
 local_base = expanduser("~") + '/Projects/backup/tdesktop'
 if not os.path.isdir(local_base):
-    local_base = '/mnt/c/Telegram/Projects/backup/tdesktop'
+    local_base = '/mnt/c/Relay/Projects/backup/tdesktop'
     if not os.path.isdir(local_base):
         print('Backup path not found: ' + local_base)
         sys.exit(1)

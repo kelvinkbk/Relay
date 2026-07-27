@@ -20,7 +20,7 @@ python3 .agents/skills/process-inbox/scripts/workspace.py prepare
 
 Use `python` or `py -3` when that is the host's Python 3 command. The helper:
 
-- reads `Telegram/build/ai-machine-tag`;
+- reads `Relay/build/ai-machine-tag`;
 - combines it with the checkout folder, for example `macbook-twork`;
 - locates the sibling `ai-tdesktop` and `ai-tdesktop-worktrees` directories,
   with `AI_TDESKTOP_ROOT` and `AI_TDESKTOP_WORKTREES_ROOT` as overrides;

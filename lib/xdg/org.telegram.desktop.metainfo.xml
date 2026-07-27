@@ -66,7 +66,7 @@
         <keyword>im</keyword>
     </keywords>
     <requires>
-        <!-- windowMinHeight from Telegram/SourceFiles/window/window.style -->
+        <!-- windowMinHeight from Relay/SourceFiles/window/window.style -->
         <display_length compare="ge">480</display_length>
         <internet>always</internet>
         <!-- on-screen keyboards are too big for current minimal display height -->

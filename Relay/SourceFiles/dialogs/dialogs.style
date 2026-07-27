@@ -92,13 +92,13 @@ dialogsFilterPadding: point(7px, 7px);
 dialogsFilterSkip: 4px;
 
 defaultDialogRow: DialogRow {
-	height: dialogsRowHeight;
-	padding: margins(10px, 8px, 10px, 8px);
-	photoSize: 46px;
-	nameLeft: 68px;
-	nameTop: 10px;
-	textLeft: 68px;
-	textTop: 34px;
+	height: 72px;
+	padding: margins(12px, 12px, 12px, 12px);
+	photoSize: 48px;
+	nameLeft: 74px;
+	nameTop: 14px;
+	textLeft: 74px;
+	textTop: 40px;
 }
 communityRequestableListItem: PeerListItem(defaultPeerListItem) {
 	height: dialogsRowHeight;            // == st::defaultDialogRow.height (62px)

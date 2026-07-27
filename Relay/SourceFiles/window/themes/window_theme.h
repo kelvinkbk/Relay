@@ -271,7 +271,7 @@ private:
 	QImage _original;
 	QImage _prepared;
 	QImage _preparedForTiled;
-	bool _nightMode = false;
+	bool _nightMode = true;
 	bool _tileDayValue = false;
 	bool _tileNightValue = true;
 	std::optional<bool> _localStoredTileDayValue;

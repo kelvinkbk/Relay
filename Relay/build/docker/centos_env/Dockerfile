@@ -1068,4 +1068,4 @@ ENV CCACHE_DISABLE=true
 WORKDIR /usr/src/tdesktop
 USER user
 VOLUME [ "/usr/src/tdesktop" ]
-CMD [ "/usr/src/tdesktop/Telegram/build/docker/centos_env/build.sh" ]
+CMD [ "/usr/src/tdesktop/Relay/build/docker/centos_env/build.sh" ]

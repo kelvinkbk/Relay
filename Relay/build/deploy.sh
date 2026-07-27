@@ -79,7 +79,7 @@ if [ "$BuildTarget" == "mac" ]; then
 elif [ "$BuildTarget" == "linux" ]; then
   BackupPath="/media/psf/Home/Projects/backup/tdesktop"
   if [ ! -d "$BackupPath" ]; then
-    BackupPath="/mnt/c/Telegram/Projects/backup/tdesktop"
+    BackupPath="/mnt/c/Relay/Projects/backup/tdesktop"
   fi
 else
   Error "Can't deploy here"

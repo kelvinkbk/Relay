@@ -1,102 +1,102 @@
-[submodule "Telegram/ThirdParty/GSL"]
-	path = Telegram/ThirdParty/GSL
+[submodule "Relay/ThirdParty/GSL"]
+	path = Relay/ThirdParty/GSL
 	url = https://github.com/Microsoft/GSL.git
-[submodule "Telegram/ThirdParty/xxHash"]
-	path = Telegram/ThirdParty/xxHash
+[submodule "Relay/ThirdParty/xxHash"]
+	path = Relay/ThirdParty/xxHash
 	url = https://github.com/Cyan4973/xxHash.git
-[submodule "Telegram/ThirdParty/rlottie"]
-	path = Telegram/ThirdParty/rlottie
+[submodule "Relay/ThirdParty/rlottie"]
+	path = Relay/ThirdParty/rlottie
 	url = https://github.com/desktop-app/rlottie.git
-[submodule "Telegram/ThirdParty/lz4"]
-	path = Telegram/ThirdParty/lz4
+[submodule "Relay/ThirdParty/lz4"]
+	path = Relay/ThirdParty/lz4
 	url = https://github.com/lz4/lz4.git
-[submodule "Telegram/lib_crl"]
-	path = Telegram/lib_crl
+[submodule "Relay/lib_crl"]
+	path = Relay/lib_crl
 	url = https://github.com/desktop-app/lib_crl.git
-[submodule "Telegram/lib_rpl"]
-	path = Telegram/lib_rpl
+[submodule "Relay/lib_rpl"]
+	path = Relay/lib_rpl
 	url = https://github.com/desktop-app/lib_rpl.git
-[submodule "Telegram/lib_base"]
-	path = Telegram/lib_base
+[submodule "Relay/lib_base"]
+	path = Relay/lib_base
 	url = https://github.com/desktop-app/lib_base.git
-[submodule "Telegram/codegen"]
-	path = Telegram/codegen
+[submodule "Relay/codegen"]
+	path = Relay/codegen
 	url = https://github.com/desktop-app/codegen.git
-[submodule "Telegram/lib_ui"]
-	path = Telegram/lib_ui
+[submodule "Relay/lib_ui"]
+	path = Relay/lib_ui
 	url = https://github.com/desktop-app/lib_ui.git
-[submodule "Telegram/lib_lottie"]
-	path = Telegram/lib_lottie
+[submodule "Relay/lib_lottie"]
+	path = Relay/lib_lottie
 	url = https://github.com/desktop-app/lib_lottie.git
-[submodule "Telegram/lib_tl"]
-	path = Telegram/lib_tl
+[submodule "Relay/lib_tl"]
+	path = Relay/lib_tl
 	url = https://github.com/desktop-app/lib_tl.git
-[submodule "Telegram/lib_spellcheck"]
-	path = Telegram/lib_spellcheck
+[submodule "Relay/lib_spellcheck"]
+	path = Relay/lib_spellcheck
 	url = https://github.com/desktop-app/lib_spellcheck
-[submodule "Telegram/lib_storage"]
-	path = Telegram/lib_storage
+[submodule "Relay/lib_storage"]
+	path = Relay/lib_storage
 	url = https://github.com/desktop-app/lib_storage.git
 [submodule "cmake"]
 	path = cmake
 	url = https://github.com/desktop-app/cmake_helpers.git
-[submodule "Telegram/ThirdParty/expected"]
-	path = Telegram/ThirdParty/expected
+[submodule "Relay/ThirdParty/expected"]
+	path = Relay/ThirdParty/expected
 	url = https://github.com/TartanLlama/expected
-[submodule "Telegram/ThirdParty/QR"]
-	path = Telegram/ThirdParty/QR
+[submodule "Relay/ThirdParty/QR"]
+	path = Relay/ThirdParty/QR
 	url = https://github.com/nayuki/QR-Code-generator
-[submodule "Telegram/lib_qr"]
-	path = Telegram/lib_qr
+[submodule "Relay/lib_qr"]
+	path = Relay/lib_qr
 	url = https://github.com/desktop-app/lib_qr.git
-[submodule "Telegram/ThirdParty/hunspell"]
-	path = Telegram/ThirdParty/hunspell
+[submodule "Relay/ThirdParty/hunspell"]
+	path = Relay/ThirdParty/hunspell
 	url = https://github.com/hunspell/hunspell
-[submodule "Telegram/ThirdParty/range-v3"]
-	path = Telegram/ThirdParty/range-v3
+[submodule "Relay/ThirdParty/range-v3"]
+	path = Relay/ThirdParty/range-v3
 	url = https://github.com/ericniebler/range-v3.git
-[submodule "Telegram/ThirdParty/nimf"]
-	path = Telegram/ThirdParty/nimf
+[submodule "Relay/ThirdParty/nimf"]
+	path = Relay/ThirdParty/nimf
 	url = https://github.com/hamonikr/nimf.git
-[submodule "Telegram/ThirdParty/hime"]
-	path = Telegram/ThirdParty/hime
+[submodule "Relay/ThirdParty/hime"]
+	path = Relay/ThirdParty/hime
 	url = https://github.com/hime-ime/hime.git
-[submodule "Telegram/ThirdParty/fcitx5-qt"]
-	path = Telegram/ThirdParty/fcitx5-qt
+[submodule "Relay/ThirdParty/fcitx5-qt"]
+	path = Relay/ThirdParty/fcitx5-qt
 	url = https://github.com/fcitx/fcitx5-qt.git
-[submodule "Telegram/lib_webrtc"]
-	path = Telegram/lib_webrtc
+[submodule "Relay/lib_webrtc"]
+	path = Relay/lib_webrtc
 	url = https://github.com/desktop-app/lib_webrtc.git
-[submodule "Telegram/ThirdParty/tgcalls"]
-	path = Telegram/ThirdParty/tgcalls
+[submodule "Relay/ThirdParty/tgcalls"]
+	path = Relay/ThirdParty/tgcalls
 	url = https://github.com/TelegramMessenger/tgcalls.git
-[submodule "Telegram/lib_webview"]
-	path = Telegram/lib_webview
+[submodule "Relay/lib_webview"]
+	path = Relay/lib_webview
 	url = https://github.com/desktop-app/lib_webview.git
-[submodule "Telegram/ThirdParty/kimageformats"]
-	path = Telegram/ThirdParty/kimageformats
+[submodule "Relay/ThirdParty/kimageformats"]
+	path = Relay/ThirdParty/kimageformats
 	url = https://github.com/KDE/kimageformats.git
-[submodule "Telegram/ThirdParty/kcoreaddons"]
-	path = Telegram/ThirdParty/kcoreaddons
+[submodule "Relay/ThirdParty/kcoreaddons"]
+	path = Relay/ThirdParty/kcoreaddons
 	url = https://github.com/KDE/kcoreaddons.git
-[submodule "Telegram/ThirdParty/cld3"]
-	path = Telegram/ThirdParty/cld3
+[submodule "Relay/ThirdParty/cld3"]
+	path = Relay/ThirdParty/cld3
 	url = https://github.com/google/cld3.git
-[submodule "Telegram/ThirdParty/libprisma"]
-	path = Telegram/ThirdParty/libprisma
+[submodule "Relay/ThirdParty/libprisma"]
+	path = Relay/ThirdParty/libprisma
 	url = https://github.com/desktop-app/libprisma.git
-[submodule "Telegram/ThirdParty/xdg-desktop-portal"]
-	path = Telegram/ThirdParty/xdg-desktop-portal
+[submodule "Relay/ThirdParty/xdg-desktop-portal"]
+	path = Relay/ThirdParty/xdg-desktop-portal
 	url = https://github.com/flatpak/xdg-desktop-portal.git
-[submodule "Telegram/lib_translate"]
-	path = Telegram/lib_translate
+[submodule "Relay/lib_translate"]
+	path = Relay/lib_translate
 	url = https://github.com/desktop-app/lib_translate
-[submodule "Telegram/ThirdParty/cmark-gfm"]
-	path = Telegram/ThirdParty/cmark-gfm
+[submodule "Relay/ThirdParty/cmark-gfm"]
+	path = Relay/ThirdParty/cmark-gfm
 	url = https://github.com/github/cmark-gfm.git
-[submodule "Telegram/ThirdParty/MicroTeX"]
-	path = Telegram/ThirdParty/MicroTeX
+[submodule "Relay/ThirdParty/MicroTeX"]
+	path = Relay/ThirdParty/MicroTeX
 	url = https://github.com/desktop-app/MicroTeX.git
-[submodule "Telegram/ThirdParty/TooManyCooks"]
-	path = Telegram/ThirdParty/TooManyCooks
+[submodule "Relay/ThirdParty/TooManyCooks"]
+	path = Relay/ThirdParty/TooManyCooks
 	url = https://github.com/tzcnt/TooManyCooks.git

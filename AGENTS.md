@@ -4,21 +4,21 @@ This guide defines repository-wide instructions for coding agents working with t
 
 ## Working from Codex on Windows + WSL
 
-This checkout may be opened in Codex Desktop through the Windows UNC path `\\wsl.localhost\{distro}\home\{user}\Telegram\tdesktop`, while the real Linux path is `/home/{user}/Telegram/tdesktop`. Treat it as a WSL/Linux checkout first, not as a native Windows checkout.
+This checkout may be opened in Codex Desktop through the Windows UNC path `\\wsl.localhost\{distro}\home\{user}\Relay\tdesktop`, while the real Linux path is `/home/{user}/Relay/tdesktop`. Treat it as a WSL/Linux checkout first, not as a native Windows checkout.
 
 - Prefer running repository-aware commands through WSL:
 
 ```powershell
-wsl.exe -d {distro} --cd /home/{user}/Telegram/tdesktop -- <command>
+wsl.exe -d {distro} --cd /home/{user}/Relay/tdesktop -- <command>
 ```
 
 - PowerShell can read and write files through the UNC path, but native Windows tools may see different ownership, path, executable, or line-ending behavior than Linux tools.
 - Git from PowerShell over `\\wsl.localhost\...` can fail with `detected dubious ownership`. Use WSL Git instead. Do not change global Git `safe.directory` settings unless the user explicitly asks for that.
-- Keep path styles matched to the shell. Use `/home/{user}/Telegram/tdesktop/...` with WSL commands, and quoted `\\wsl.localhost\{distro}\home\{user}\Telegram\tdesktop\...` paths with native Windows commands. Avoid passing UNC paths to Linux tools or Linux paths to native Windows tools unless the tool explicitly supports them.
-- If a command behaves strangely from the PowerShell UNC working directory, retry the same command through `wsl.exe -d {distro} --cd /home/{user}/Telegram/tdesktop -- ...` before concluding the repository or command is broken.
-- Recursive searches and repo inspection are usually faster and more faithful through WSL, for example `wsl.exe -d {distro} --cd /home/{user}/Telegram/tdesktop -- rg ...`.
+- Keep path styles matched to the shell. Use `/home/{user}/Relay/tdesktop/...` with WSL commands, and quoted `\\wsl.localhost\{distro}\home\{user}\Relay\tdesktop\...` paths with native Windows commands. Avoid passing UNC paths to Linux tools or Linux paths to native Windows tools unless the tool explicitly supports them.
+- If a command behaves strangely from the PowerShell UNC working directory, retry the same command through `wsl.exe -d {distro} --cd /home/{user}/Relay/tdesktop -- ...` before concluding the repository or command is broken.
+- Recursive searches and repo inspection are usually faster and more faithful through WSL, for example `wsl.exe -d {distro} --cd /home/{user}/Relay/tdesktop -- rg ...`.
 - Do not assume the WSL host has the build toolchain installed directly. In this setup, WSL may not have `cmake`, while Windows may have `cmake`, and the configured `out/` tree may still target the Linux Docker toolchain. Do not run native Windows `cmake --build out` against a Linux/Docker build tree.
-- For WSL/Linux builds, use the Docker build entry point from the repository root: `Telegram/build/docker/centos_env/build_debug.sh`. The Docker daemon must be reachable from WSL; checking `docker info` is fine, but do not start a build unless the user asked for one.
+- For WSL/Linux builds, use the Docker build entry point from the repository root: `Relay/build/docker/centos_env/build_debug.sh`. The Docker daemon must be reachable from WSL; checking `docker info` is fine, but do not start a build unless the user asked for one.
 - Existing build outputs may be Linux binaries, for example `out/Debug/Telegram` as an ELF executable, not `Telegram.exe`. Verify the build tree before assuming which platform produced it.
 - Be careful with text file line endings. In a WSL/Linux checkout, files should remain LF-only unless the file already uses another convention. CRLF finishing applies only to native, non-WSL Windows runs/checkouts. Do not let PowerShell or Windows tools silently rewrite WSL files to CRLF. If a file becomes mixed, normalize it back to the convention appropriate for the current checkout, without adding a UTF-8 BOM.
 - When using the local `perform-task` skill from this WSL checkout, keep external AI task artifacts and edited project text files LF-only. Treat its Windows text-normalization phase as not applicable to WSL, except to record that line endings were checked and kept LF/no-BOM. Run CRLF normalization only in a native, non-WSL Windows checkout.
@@ -29,7 +29,7 @@ The build system expects this directory layout:
 
 ```text
 L:\Telegram\                    # BuildPath
-L:\Telegram\tdesktop\           # Repository (you work here)
+L:\Relay\tdesktop\           # Repository (you work here)
 L:\Telegram\Libraries\          # 32-bit dependencies (Linux/macOS)
 L:\Telegram\win64\Libraries\    # 64-bit dependencies (Windows)
 L:\Telegram\ThirdParty\         # Build tools (NuGet, Python, etc.)
@@ -52,7 +52,7 @@ That's it. The `out/` directory is already configured. The executable will be at
 **From WSL, run through the Linux Docker build environment:**
 
 ```bash
-Telegram/build/docker/centos_env/build_debug.sh
+Relay/build/docker/centos_env/build_debug.sh
 ```
 
 **Important:** When running cmake from a shell that doesn't support `cd`, use quoted absolute paths:
@@ -83,13 +83,13 @@ cmake --build "l:\Telegram\tx64\out" --config Debug --target Telegram
 
 ## Key Files
 
-- **`Telegram/build/version`** - Version information
+- **`Relay/build/version`** - Version information
 - **`out/`** - Build output directory
 
 ## Troubleshooting
 
 ### "Libraries not found"
-Ensure the repository is in `L:\Telegram\tdesktop`. The build system requires `../win64/Libraries` to exist.
+Ensure the repository is in `L:\Relay\tdesktop`. The build system requires `../win64/Libraries` to exist.
 
 ### Build fails with "wrong command prompt"
 On Windows, use the correct Visual Studio Native Tools Command Prompt matching your target (x64/x86/ARM64).
@@ -314,7 +314,7 @@ if (Platform::IsLinux()) {
 }
 ```
 
-`Q_OS_LINUX` is only for the rare case where you genuinely want exactly Linux and not the other Unix-like systems — usually you don't. The few existing uses (`Telegram/SourceFiles/core/sandbox.cpp`, `Telegram/SourceFiles/platform/linux/specific_linux.cpp`) are such genuinely Linux-only code paths and stay as-is.
+`Q_OS_LINUX` is only for the rare case where you genuinely want exactly Linux and not the other Unix-like systems — usually you don't. The few existing uses (`Relay/SourceFiles/core/sandbox.cpp`, `Relay/SourceFiles/platform/linux/specific_linux.cpp`) are such genuinely Linux-only code paths and stay as-is.
 
 ## API Usage
 
@@ -322,8 +322,8 @@ if (Platform::IsLinux()) {
 
 API definitions use [TL Language](https://core.telegram.org/mtproto/TL):
 
-1. **`Telegram/SourceFiles/mtproto/scheme/mtproto.tl`** - MTProto protocol (encryption, auth, etc.)
-2. **`Telegram/SourceFiles/mtproto/scheme/api.tl`** - Telegram API (messages, users, chats, etc.)
+1. **`Relay/SourceFiles/mtproto/scheme/mtproto.tl`** - MTProto protocol (encryption, auth, etc.)
+2. **`Relay/SourceFiles/mtproto/scheme/api.tl`** - Telegram API (messages, users, chats, etc.)
 
 ### Making API Requests
 
@@ -471,7 +471,7 @@ void MyWidget::paintEvent(QPaintEvent *e) {
 
 ### String Definitions
 
-Strings are defined in `Telegram/Resources/langs/lang.strings`:
+Strings are defined in `Relay/Resources/langs/lang.strings`:
 
 ```
 "lng_settings_title" = "Settings";

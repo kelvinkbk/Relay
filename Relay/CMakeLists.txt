@@ -51,7 +51,7 @@ if (WIN32)
     )
 endif()
 
-set_target_properties(Telegram PROPERTIES AUTOMOC ON)
+set_target_properties(Telegram PROPERTIES AUTOMOC ON OUTPUT_NAME "Relay")
 
 target_link_libraries(Telegram
 PRIVATE
@@ -2133,7 +2133,7 @@ elseif (APPLE)
         target_link_libraries(Telegram PRIVATE desktop-app::external_iconv)
     endif()
 
-    set(icons_path ${CMAKE_CURRENT_SOURCE_DIR}/Telegram/Images.xcassets)
+    set(icons_path ${CMAKE_CURRENT_SOURCE_DIR}/Relay/Images.xcassets)
     if (CMAKE_GENERATOR STREQUAL Xcode)
         target_add_resource(Telegram ${icons_path})
     else()
@@ -2257,7 +2257,7 @@ set_target_properties(Telegram PROPERTIES
     OUTPUT_NAME ${output_name}
     MACOSX_BUNDLE_GUI_IDENTIFIER ${bundle_identifier}
     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Telegram.plist
-    XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_SOURCE_DIR}/Telegram/${bundle_entitlements}"
+    XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_SOURCE_DIR}/Relay/${bundle_entitlements}"
     XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${bundle_identifier}
     XCODE_ATTRIBUTE_CURRENT_PROJECT_VERSION ${desktop_app_version_string}
     XCODE_ATTRIBUTE_PRODUCT_NAME ${output_name}
@@ -2271,8 +2271,8 @@ set_target_properties(Telegram PROPERTIES
     XCODE_ATTRIBUTE_CLANG_DEBUG_INFORMATION_LEVEL $<IF:$<CONFIG:Debug>,default,line-tables-only>
 )
 set(entitlement_sources
-    "${CMAKE_CURRENT_SOURCE_DIR}/Telegram/Telegram.entitlements"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Telegram/Telegram Lite.entitlements"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Relay/Telegram.entitlements"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Relay/Telegram Lite.entitlements"
 )
 target_sources(Telegram PRIVATE ${entitlement_sources})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/Telegram PREFIX Resources FILES ${entitlement_sources})
