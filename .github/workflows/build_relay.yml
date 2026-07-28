@@ -1,0 +1,68 @@
+name: Build Relay Executable (Windows x64)
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    name: Build Relay.exe (VS 2022 MSVC v143)
+    runs-on: windows-2022
+    env:
+      TDESKTOP_API_ID: ${{ secrets.TDESKTOP_API_ID || '17349' }}
+      TDESKTOP_API_HASH: ${{ secrets.TDESKTOP_API_HASH || '344583e45741c457fe1862106095a5eb' }}
+
+    steps:
+      - name: Checkout Repository with Submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache Build Dependencies
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: ../Libraries/win64/local
+          key: relay-deps-win64-v1-${{ hashFiles('Relay/build/prepare/prepare.py', 'Relay/build/prepare/third_party.py') }}
+          restore-keys: |
+            relay-deps-win64-v1-
+
+      - name: Set up Developer Command Prompt for VS 2022
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+          toolset: 14.37
+
+      - name: Run Dependency Preparation Script
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          python Relay/build/prepare/prepare.py --win64
+
+      - name: Configure CMake Solution
+        shell: cmd
+        run: |
+          configure.bat x64 -DTDESKTOP_API_ID=%TDESKTOP_API_ID% -DTDESKTOP_API_HASH=%TDESKTOP_API_HASH%
+
+      - name: Compile Relay (Telegram Target)
+        shell: cmd
+        run: |
+          cmake --build out --config Debug --target Telegram --parallel
+
+      - name: Upload Relay Executable Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Relay-Executable-Win64-Debug
+          path: |
+            out/Debug/Telegram.exe
+            out/Debug/Relay.exe
+          if-no-files-found: error

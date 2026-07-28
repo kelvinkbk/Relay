@@ -33,10 +33,10 @@ if (configuration_types_init
     set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES};MinSizeRel" CACHE STRING "" FORCE)
 endif()
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Relay)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Telegram)
 
 get_filename_component(third_party_loc "Relay/ThirdParty" REALPATH)
-get_filename_component(submodules_loc "Telegram" REALPATH)
+get_filename_component(submodules_loc "Relay" REALPATH)
 get_filename_component(cmake_helpers_loc "cmake" REALPATH)
 
 if (NOT DESKTOP_APP_USE_PACKAGED AND WIN32)
@@ -63,4 +63,4 @@ set(desktop_app_skip_libs
 )
 
 add_subdirectory(cmake)
-add_subdirectory(Telegram)
+add_subdirectory(Relay)

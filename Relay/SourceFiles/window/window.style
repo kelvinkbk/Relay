@@ -23,6 +23,21 @@ columnMinimalWidthMain: 380px;
 columnMinimalWidthThird: 292px;
 columnMaximalWidthThird: 392px;
 
+relayNavWidth: 70px;
+relayNavCollapsedWidth: 70px;
+
+relayNavChats: icon {{ "navigation/chats_default", menuIconFg }};
+relayNavChatsActive: icon {{ "navigation/chats_active", windowFgActive }};
+relayNavContacts: icon {{ "navigation/contacts_default", menuIconFg }};
+relayNavContactsActive: icon {{ "navigation/contacts_active", windowFgActive }};
+relayNavCalls: icon {{ "navigation/calls_default", menuIconFg }};
+relayNavCallsActive: icon {{ "navigation/calls_active", windowFgActive }};
+relayNavSaved: icon {{ "navigation/saved_default", menuIconFg }};
+relayNavSavedActive: icon {{ "navigation/saved_active", windowFgActive }};
+relayNavArchive: icon {{ "navigation/archive_default", menuIconFg }};
+relayNavArchiveActive: icon {{ "navigation/archive_active", windowFgActive }};
+relayNavSettings: icon {{ "navigation/settings_default", menuIconFg }};
+relayNavSettingsActive: icon {{ "navigation/settings_active", windowFgActive }};
 adaptiveChatWideWidth: 880px;
 
 notifyBorder: windowShadowFgFallback;

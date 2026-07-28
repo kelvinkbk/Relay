@@ -1995,6 +1995,8 @@ PRIVATE
     window/window_lock_widgets.h
     window/window_main_menu.cpp
     window/window_main_menu.h
+    window/window_navigation_rail.cpp
+    window/window_navigation_rail.h
     window/window_main_menu_helpers.cpp
     window/window_main_menu_helpers.h
     window/window_media_preview.cpp
@@ -2271,8 +2273,8 @@ set_target_properties(Telegram PROPERTIES
     XCODE_ATTRIBUTE_CLANG_DEBUG_INFORMATION_LEVEL $<IF:$<CONFIG:Debug>,default,line-tables-only>
 )
 set(entitlement_sources
-    "${CMAKE_CURRENT_SOURCE_DIR}/Relay/Telegram.entitlements"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Relay/Telegram Lite.entitlements"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Telegram/Telegram.entitlements"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Telegram/Telegram Lite.entitlements"
 )
 target_sources(Telegram PRIVATE ${entitlement_sources})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/Telegram PREFIX Resources FILES ${entitlement_sources})
