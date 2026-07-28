@@ -40,7 +40,6 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x64
-          toolset: 14.37
 
       - name: Run Dependency Preparation Script
         if: steps.cache-deps.outputs.cache-hit != 'true'
