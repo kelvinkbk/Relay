@@ -43,6 +43,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "window/window_slide_animation.h"
 #include "window/window_history_hider.h"
 #include "window/window_controller.h"
+#include "window/window_navigation_rail.h"
 #include "window/window_peer_menu.h"
 #include "window/window_session_controller_link_info.h"
 #include "window/themes/window_theme.h"
@@ -266,6 +267,7 @@ MainWidget::MainWidget(
 		_controller,
 		Dialogs::Widget::Layout::Main)
 	: nullptr)
+, _navigationRail(base::make_unique_q<Window::NavigationRail>(this, _controller))
 , _history(std::in_place, this, _controller)
 , _sideShadow(_dialogs
 	? base::make_unique_q<Ui::PlainShadow>(this)
@@ -2445,11 +2447,21 @@ void MainWidget::updateControlsGeometry() {
 		_thirdShadow.destroy();
 	}
 	const auto mainSectionTop = getMainSectionTop();
+	auto navWidth = isOneColumn() ? 0 : st::relayNavWidth;
 	auto dialogsWidth = _dialogs
 		? qRound(_a_dialogsWidth.value(_dialogsWidth))
 		: isOneColumn()
 		? width()
 		: 0;
+
+	if (_navigationRail) {
+		if (navWidth > 0) {
+			_navigationRail->setGeometry(0, 0, navWidth, height());
+			_navigationRail->show();
+		} else {
+			_navigationRail->hide();
+		}
+	}
 	if (isOneColumn()) {
 		if (_callTopBar) {
 			_callTopBar->resizeToWidth(dialogsWidth);
@@ -2492,12 +2504,12 @@ void MainWidget::updateControlsGeometry() {
 		if (_dialogs) {
 			accumulate_min(
 				dialogsWidth,
-				width() - st::columnMinimalWidthMain);
-			_dialogs->setGeometryToLeft(0, 0, dialogsWidth, height());
+				width() - st::columnMinimalWidthMain - navWidth);
+			_dialogs->setGeometryToLeft(navWidth, 0, dialogsWidth, height());
 		}
 		if (_sideShadow) {
 			_sideShadow->setGeometryToLeft(
-				dialogsWidth,
+				navWidth + dialogsWidth,
 				shadowTop,
 				st::lineWidth,
 				shadowHeight);
@@ -2510,31 +2522,32 @@ void MainWidget::updateControlsGeometry() {
 				shadowHeight);
 		}
 		const auto mainSectionWidth = width()
+			- navWidth
 			- dialogsWidth
 			- thirdSectionWidth;
 		if (_callTopBar) {
 			_callTopBar->resizeToWidth(mainSectionWidth);
-			_callTopBar->moveToLeft(dialogsWidth, 0);
+			_callTopBar->moveToLeft(navWidth + dialogsWidth, 0);
 		}
 		if (_exportTopBar) {
 			_exportTopBar->resizeToWidth(mainSectionWidth);
-			_exportTopBar->moveToLeft(dialogsWidth, _callTopBarHeight);
+			_exportTopBar->moveToLeft(navWidth + dialogsWidth, _callTopBarHeight);
 		}
 		if (_player) {
 			_player->resizeToWidth(mainSectionWidth);
 			_player->moveToLeft(
-				dialogsWidth,
+				navWidth + dialogsWidth,
 				_callTopBarHeight + _exportTopBarHeight);
 		}
 		_history->setGeometryWithTopMoved(QRect(
-			dialogsWidth,
+			navWidth + dialogsWidth,
 			mainSectionTop,
 			mainSectionWidth,
 			height() - mainSectionTop
 		), _contentScrollAddToY);
 		if (_hider) {
 			_hider->setGeometryToLeft(
-				dialogsWidth,
+				navWidth + dialogsWidth,
 				0,
 				mainSectionWidth,
 				height());

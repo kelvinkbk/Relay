@@ -2599,7 +2599,8 @@ auto SessionController::computeColumnLayout() const -> ColumnLayout {
 	auto useOneColumnLayout = [&] {
 		auto minimalNormal = st::columnMinimalWidthLeft
 			+ st::columnMinimalWidthMain;
-		if (_hasDialogs && bodyWidth < minimalNormal) {
+		// Relay: account for navigation rail width when determining layout
+		if (_hasDialogs && (bodyWidth - st::relayNavWidth) < minimalNormal) {
 			return true;
 		}
 		return false;
@@ -2619,12 +2620,14 @@ auto SessionController::computeColumnLayout() const -> ColumnLayout {
 
 	if (useOneColumnLayout()) {
 		dialogsWidth = chatWidth = bodyWidth;
-	} else if (useNormalLayout()) {
-		layout = Adaptive::WindowLayout::Normal;
-		dialogsWidth = countDialogsWidthFromRatio(bodyWidth);
-		accumulate_min(dialogsWidth, bodyWidth - st::columnMinimalWidthMain);
-		chatWidth = bodyWidth - dialogsWidth;
 	} else {
+		bodyWidth -= st::relayNavWidth; // Reduce available width for the rest
+		if (useNormalLayout()) {
+			layout = Adaptive::WindowLayout::Normal;
+			dialogsWidth = countDialogsWidthFromRatio(bodyWidth);
+			accumulate_min(dialogsWidth, bodyWidth - st::columnMinimalWidthMain);
+			chatWidth = bodyWidth - dialogsWidth;
+		} else {
 		layout = Adaptive::WindowLayout::ThreeColumn;
 		dialogsWidth = countDialogsWidthFromRatio(bodyWidth);
 		thirdWidth = countThirdColumnWidthFromRatio(bodyWidth);

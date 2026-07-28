@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Nodes -->
+  <circle cx="12" cy="12" r="4.5" fill="currentColor"/>
+  <circle cx="12" cy="28" r="4.5" fill="currentColor"/>
+  
+  <!-- Connecting Path -->
+  <path d="M 12 12 L 28 12 A 8 8 0 0 1 28 28 L 12 28" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="5" 
+        stroke-linecap="round"/>
+        
+  <!-- Relay Forward Leg -->
+  <path d="M 23 28 L 35 40" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="5" 
+        stroke-linecap="round"/>
+</svg>

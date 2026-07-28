@@ -1346,10 +1346,7 @@ void TopBarWidget::updateControlsVisibility() {
 	_menuToggle->setVisible(hasMenu
 		&& !_chooseForReportReason
 		&& (_narrowRatio < 1.));
-	_infoToggle->setVisible(hasInfo
-		&& !isOneColumn
-		&& _controller->canShowThirdSection()
-		&& !_chooseForReportReason);
+	_infoToggle->setVisible(false); // Hidden in Relay, accessible from More menu
 	const auto callsEnabled = [&] {
 		if (const auto peer = _activeChat.key.peer()) {
 			if (const auto user = peer->asUser()) {

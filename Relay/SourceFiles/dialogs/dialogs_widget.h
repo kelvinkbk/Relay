@@ -57,8 +57,8 @@ class ElasticScroll;
 template <typename Widget>
 class FadeWrapScaled;
 template <typename Widget>
-class SlideWrap;
 class VerticalLayout;
+class PopupMenu;
 } // namespace Ui
 
 namespace Window {
@@ -233,6 +233,7 @@ private:
 	void showCalendar();
 	void showSearchFrom();
 	void showMainMenu();
+	void showNewConversationMenu();
 	void clearSearchCache(bool clearPosts);
 	void setSearchQuery(const QString &query, int cursorPosition = -1);
 	void updateTopBarSuggestions();
@@ -331,6 +332,8 @@ private:
 		object_ptr<Ui::IconButton> toggle;
 		object_ptr<Ui::AbstractButton> under;
 	} _mainMenu;
+	object_ptr<Ui::IconButton> _newConversation;
+	base::unique_qptr<Ui::PopupMenu> _newConversationMenu;
 	object_ptr<Ui::IconButton> _searchForNarrowLayout;
 	object_ptr<Ui::InputField> _search;
 	object_ptr<Ui::FadeWrapScaled<Ui::IconButton>> _chooseFromUser;

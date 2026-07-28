@@ -20,6 +20,10 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "dialogs/dialogs_top_bar_suggestion.h"
 #include "dialogs/dialogs_quick_action.h"
 #include "dialogs/dialogs_key.h"
+#include "ui/widgets/popup_menu.h"
+#include "ui/widgets/menu/menu_add_action_callback_factory.h"
+#include "styles/style_chat.h" // popupMenuExpandedSeparator
+#include "styles/style_menu_icons.h"
 #include "history/history.h"
 #include "history/history_item.h"
 #include "history/view/history_view_chat_section.h"
@@ -406,6 +410,7 @@ Widget::Widget(
 		st::dialogsMenuToggle),
 	.under = object_ptr<MenuUnderButton>(_searchControls),
 })
+, _newConversation(object_ptr<Ui::IconButton>(_searchControls, st::dialogsMenuToggle))
 , _searchForNarrowLayout(_searchControls, st::dialogsSearchForNarrowFilters)
 , _search(_searchControls, st::dialogsFilter, tr::lng_dlg_filter())
 , _chooseFromUser(
@@ -1662,13 +1667,22 @@ void Widget::setupMainMenuToggle() {
 	_mainMenu.toggle->setClickedCallback([=] { showMainMenu(); });
 	_mainMenu.toggle->setIsMenuButton(true);
 	_mainMenu.toggle->setAccessibleName(tr::lng_main_menu(tr::now));
+	_mainMenu.toggle->show();
+	_mainMenu.under->show();
+
+	_newConversation->setClickedCallback([=] { showNewConversationMenu(); });
+	_newConversation->setIconOverride(&st::menuIconAddMember, &st::menuIconAddMember);
+	_newConversation->setAccessibleName(tr::lng_mac_menu_new_messages(tr::now));
+	_newConversation->show();
 
 	rpl::single(rpl::empty) | rpl::then(
 		controller()->filtersMenuChanged()
 	) | rpl::on_next([=] {
 		const auto filtersHidden = !controller()->filtersWidth();
-		_mainMenu.toggle->setVisible(filtersHidden);
-		_mainMenu.under->setVisible(filtersHidden);
+		// Relay: Hide the old menu toggle completely as we have migrated all features
+		_mainMenu.toggle->setVisible(false);
+		_mainMenu.under->setVisible(false);
+		_newConversation->setVisible(filtersHidden);
 		_searchForNarrowLayout->setVisible(!filtersHidden);
 		updateControlsGeometry();
 	}, lifetime());
@@ -1683,6 +1697,31 @@ void Widget::setupMainMenuToggle() {
 			: &st::dialogsMenuToggleUnreadMuted;
 		_mainMenu.toggle->setIconOverride(icon, icon);
 	}, _mainMenu.toggle->lifetime());
+}
+
+void Widget::showNewConversationMenu() {
+	if (_newConversationMenu) {
+		_newConversationMenu = nullptr;
+		return;
+	}
+
+	_newConversationMenu = base::make_unique_q<Ui::PopupMenu>(
+		this,
+		st::popupMenuExpandedSeparator);
+
+	_newConversationMenu->addAction(tr::lng_mac_menu_new_messages(tr::now), [=] {
+		controller()->show(PrepareContactsBox(controller()));
+	}, &st::menuIconProfile);
+
+	_newConversationMenu->addAction(tr::lng_create_group_title(tr::now), [=] {
+		controller()->showNewGroup();
+	}, &st::menuIconGroups);
+
+	_newConversationMenu->addAction(tr::lng_create_channel_title(tr::now), [=] {
+		controller()->showNewChannel();
+	}, &st::menuIconChannel);
+
+	_newConversationMenu->popup(QCursor::pos());
 }
 
 void Widget::setupStories() {
@@ -4453,6 +4492,10 @@ void Widget::updateControlsGeometry() {
 		(_narrowWidth - _mainMenu.toggle->width()) / 2,
 		narrowRatio);
 	_mainMenu.toggle->moveToLeft(mainMenuLeft, st::dialogsFilterPadding.y());
+	
+	// Position _newConversation to the right of the search bar
+	_newConversation->moveToLeft(filterLeft + filterWidth + st::dialogsFilterPadding.x(), st::dialogsFilterPadding.y());
+
 	_mainMenu.under->setGeometry(
 		0,
 		0,

@@ -653,6 +653,9 @@ rpl::producer<QString> Main::title() {
 	return tr::lng_menu_settings();
 }
 
+#include "window/themes/window_theme.h"
+#include "styles/style_menu_icons.h"
+
 void Main::fillTopBarMenu(const Ui::Menu::MenuCallback &addAction) {
 	const auto &list = Core::App().domain().accounts();
 	if (list.size() < Core::App().domain().maxAccounts()) {
@@ -667,6 +670,11 @@ void Main::fillTopBarMenu(const Ui::Menu::MenuCallback &addAction) {
 			[=] { showOther(InformationId()); },
 			&st::menuIconEdit);
 	}
+	addAction(
+		tr::lng_settings_theme_night(tr::now),
+		[=] { Window::Theme::ToggleNightMode(); },
+		&st::menuIconNightMode);
+
 	const auto window = &controller()->window();
 	const auto logout = addAction({
 		.text = tr::lng_settings_logout(tr::now),
