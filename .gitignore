@@ -67,3 +67,8 @@ settings.local.json
 
 # Generated changelog page (built by CI, deployed to GitHub Pages)
 /docs/changelog/
+
+# Log downloads and extracted log folders
+github_logs/
+logs_*.zip
+*.zip
