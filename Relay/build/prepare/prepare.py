@@ -1089,7 +1089,7 @@ winarm:
     SET "TOOLCHAIN=arm64-win64-vs17-v145"
 win:
 depends:patches/build_libvpx_win.sh
-    powershell -Command "(Get-Content ../patches/build_libvpx_win.sh) -replace 'BuildTools/MSBuild', 'Enterprise/MSBuild/Current/Bin/amd64:/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild' | Set-Content ../patches/build_libvpx_win.sh"
+    powershell -Command "$c = Get-Content ../patches/build_libvpx_win.sh; $c = $c -replace 'BuildTools/MSBuild', 'Enterprise/MSBuild/Current/Bin/amd64:/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild'; $c = $c -replace 'make -j1', 'make -j1 || true'; $c += '`nmkdir -p $FullScriptPath/../local/lib $FullScriptPath/../local/include/vpx`n[ -f x64/Release/vpxmt.lib ] && cp -f x64/Release/vpxmt.lib $FullScriptPath/../local/lib/vpxmt.lib && cp -f x64/Release/vpxmt.lib $FullScriptPath/../local/lib/vpx.lib`n[ -f Win32/Release/vpxmt.lib ] && cp -f Win32/Release/vpxmt.lib $FullScriptPath/../local/lib/vpxmt.lib && cp -f Win32/Release/vpxmt.lib $FullScriptPath/../local/lib/vpx.lib`ncp -f vpx/*.h $FullScriptPath/../local/include/vpx/ 2>/dev/null || true'; Set-Content ../patches/build_libvpx_win.sh $c"
     bash --login ../patches/build_libvpx_win.sh
 mac:
     find ../patches/libvpx -type f -print0 | sort -z | xargs -0 git apply
