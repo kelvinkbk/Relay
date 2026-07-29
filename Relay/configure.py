@@ -5,7 +5,7 @@ the official desktop application for the Telegram messaging service.
 For license and copyright information please follow this link:
 https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 '''
-import sys, os, re, subprocess
+import sys, os, re, subprocess, shutil
 
 sys.dont_write_bytecode = True
 scriptPath = os.path.dirname(os.path.abspath(__file__))
@@ -25,8 +25,14 @@ for p in candidate_cmake_paths:
 
 if not found_cmake:
     fallback_cmake_dir = os.path.abspath(os.path.join(scriptPath, '..', 'cmake'))
-    print(f"[INFO] run_cmake.py not found. Cloning cmake_helpers to {fallback_cmake_dir}...")
-    subprocess.run(['git', 'clone', 'https://github.com/desktop-app/cmake_helpers.git', fallback_cmake_dir], check=False)
+    print(f"[INFO] run_cmake.py not found. Setting up cmake_helpers in {fallback_cmake_dir}...")
+    if os.path.exists(fallback_cmake_dir):
+        subprocess.run(['git', 'submodule', 'update', '--init', '--recursive', '--force', 'cmake'], check=False)
+        if not os.path.isfile(os.path.join(fallback_cmake_dir, 'run_cmake.py')):
+            shutil.rmtree(fallback_cmake_dir, ignore_errors=True)
+            subprocess.run(['git', 'clone', 'https://github.com/desktop-app/cmake_helpers.git', fallback_cmake_dir], check=False)
+    else:
+        subprocess.run(['git', 'clone', 'https://github.com/desktop-app/cmake_helpers.git', fallback_cmake_dir], check=False)
     sys.path.insert(0, fallback_cmake_dir)
 
 import run_cmake
