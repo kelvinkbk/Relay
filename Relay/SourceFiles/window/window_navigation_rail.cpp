@@ -43,9 +43,12 @@ NavigationRail::NavigationRail(QWidget *parent, not_null<SessionController*> con
 		updateUnreadBadge();
 	}, _lifetime);
 
-	_controller->dialogsEntryStateValue(
+	rpl::single(
+		_controller->dialogsEntryStateCurrent()
+	) | rpl::then(
+		_controller->dialogsEntryStateValue()
 	) | rpl::start_with_next([this](const Dialogs::EntryState &state) {
-		if (state.folder == _controller->session().data().folder(Data::Folder::kArchiveId)) {
+		if (state.key.folder() && state.key.folder()->id() == Data::Folder::kId) {
 			setActiveNavId(kArchiveId);
 		} else if (state.key.peer() == _controller->session().user()) {
 			setActiveNavId(kSavedId);
@@ -132,7 +135,7 @@ void NavigationRail::handleClick(int id) {
 			_controller->showPeerHistory(_controller->session().userPeerId());
 			break;
 		case kArchiveId:
-			_controller->openFolder(_controller->session().data().folder(Data::Folder::kArchiveId));
+			_controller->openFolder(_controller->session().data().folder(Data::Folder::kId));
 			break;
 	}
 }
