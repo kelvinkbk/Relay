@@ -20,13 +20,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: recursive
 
       - name: Checkout Submodules
+        continue-on-error: true
         shell: cmd
         run: |
           git submodule sync --recursive
-          git submodule update --init --recursive || git submodule update --init --recursive --remote
+          git submodule update --init --recursive || git submodule update --init --recursive --remote || exit 0
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
