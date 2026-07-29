@@ -55,7 +55,7 @@ jobs:
       - name: Configure CMake Solution
         shell: cmd
         run: |
-          configure.bat x64 -DTDESKTOP_API_ID=%TDESKTOP_API_ID% -DTDESKTOP_API_HASH=%TDESKTOP_API_HASH%
+          Relay\configure.bat x64 -DTDESKTOP_API_ID=%TDESKTOP_API_ID% -DTDESKTOP_API_HASH=%TDESKTOP_API_HASH%
 
       - name: Compile Relay (Telegram Target)
         shell: cmd
