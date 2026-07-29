@@ -16,11 +16,16 @@ jobs:
       TDESKTOP_API_HASH: ${{ secrets.TDESKTOP_API_HASH || '344583e45741c457fe1862106095a5eb' }}
 
     steps:
-      - name: Checkout Repository with Submodules
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+
+      - name: Checkout Submodules
+        shell: cmd
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive || git submodule update --init --recursive --remote
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
