@@ -2639,6 +2639,7 @@ auto SessionController::computeColumnLayout() const -> ColumnLayout {
 		thirdWidth = shrink.thirdWidth;
 
 		chatWidth = bodyWidth - dialogsWidth - thirdWidth;
+		}
 	}
 	return { bodyWidth, dialogsWidth, chatWidth, thirdWidth, layout };
 }
