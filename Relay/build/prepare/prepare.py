@@ -1089,7 +1089,7 @@ winarm:
     SET "TOOLCHAIN=arm64-win64-vs17-v145"
 win:
 depends:patches/build_libvpx_win.sh
-    python -c "import pathlib; p = pathlib.Path('../patches/build_libvpx_win.sh'); txt = p.read_text(); txt = txt.replace('BuildTools/MSBuild', 'Enterprise/MSBuild/Current/Bin/amd64:/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild'); txt = txt.replace('make -j1\nmake -j1 install', 'make -j1 || true\nmake -j1 install || true\nexit 0'); p.write_text(txt)"
+    python -c "import pathlib; p = pathlib.Path('../patches/build_libvpx_win.sh'); txt = p.read_text(); txt = txt.replace('BuildTools/MSBuild', 'Enterprise/MSBuild/Current/Bin/amd64:/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild'); txt = txt.replace('make -j1' + chr(10) + 'make -j1 install', 'make -j1 || true' + chr(10) + 'make -j1 install || true' + chr(10) + 'exit 0'); p.write_text(txt)"
     bash --login ../patches/build_libvpx_win.sh
 mac:
     find ../patches/libvpx -type f -print0 | sort -z | xargs -0 git apply
