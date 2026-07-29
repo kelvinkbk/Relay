@@ -10,6 +10,7 @@ import sys, os, re
 sys.dont_write_bytecode = True
 scriptPath = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(scriptPath + '/../cmake')
+sys.path.append(scriptPath + '/cmake')
 import run_cmake
 sys.path.append(scriptPath + '/build')
 import qt_version
