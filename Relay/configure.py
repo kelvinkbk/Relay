@@ -5,7 +5,7 @@ the official desktop application for the Telegram messaging service.
 For license and copyright information please follow this link:
 https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 '''
-import sys, os, re
+import sys, os, re, subprocess
 
 sys.dont_write_bytecode = True
 scriptPath = os.path.dirname(os.path.abspath(__file__))
@@ -16,10 +16,19 @@ candidate_cmake_paths = [
     os.path.abspath(os.path.join(os.getcwd(), 'cmake')),
     os.path.abspath(os.path.join(os.getcwd(), '..', 'cmake')),
 ]
+found_cmake = False
 for p in candidate_cmake_paths:
     if os.path.isfile(os.path.join(p, 'run_cmake.py')):
         sys.path.insert(0, p)
+        found_cmake = True
         break
+
+if not found_cmake:
+    fallback_cmake_dir = os.path.abspath(os.path.join(scriptPath, '..', 'cmake'))
+    print(f"[INFO] run_cmake.py not found. Cloning cmake_helpers to {fallback_cmake_dir}...")
+    subprocess.run(['git', 'clone', 'https://github.com/desktop-app/cmake_helpers.git', fallback_cmake_dir], check=False)
+    sys.path.insert(0, fallback_cmake_dir)
+
 import run_cmake
 
 candidate_build_paths = [
