@@ -56,7 +56,6 @@ class JumpDownButton;
 class ElasticScroll;
 template <typename Widget>
 class FadeWrapScaled;
-template <typename Widget>
 class VerticalLayout;
 class PopupMenu;
 } // namespace Ui
