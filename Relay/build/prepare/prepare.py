@@ -1089,6 +1089,7 @@ winarm:
     SET "TOOLCHAIN=arm64-win64-vs17-v145"
 win:
 depends:patches/build_libvpx_win.sh
+    powershell -Command "(Get-Content ../patches/build_libvpx_win.sh) -replace 'BuildTools/MSBuild', 'Enterprise/MSBuild/Current/Bin/amd64:/c/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64:/c/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild' | Set-Content ../patches/build_libvpx_win.sh"
     bash --login ../patches/build_libvpx_win.sh
 mac:
     find ../patches/libvpx -type f -print0 | sort -z | xargs -0 git apply
