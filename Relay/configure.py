@@ -8,11 +8,30 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 import sys, os, re
 
 sys.dont_write_bytecode = True
-scriptPath = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(scriptPath + '/../cmake')
-sys.path.append(scriptPath + '/cmake')
+scriptPath = os.path.dirname(os.path.abspath(__file__))
+
+candidate_cmake_paths = [
+    os.path.abspath(os.path.join(scriptPath, '..', 'cmake')),
+    os.path.abspath(os.path.join(scriptPath, 'cmake')),
+    os.path.abspath(os.path.join(os.getcwd(), 'cmake')),
+    os.path.abspath(os.path.join(os.getcwd(), '..', 'cmake')),
+]
+for p in candidate_cmake_paths:
+    if os.path.isfile(os.path.join(p, 'run_cmake.py')):
+        sys.path.insert(0, p)
+        break
 import run_cmake
-sys.path.append(scriptPath + '/build')
+
+candidate_build_paths = [
+    os.path.abspath(os.path.join(scriptPath, 'build')),
+    os.path.abspath(os.path.join(scriptPath, '..', 'build')),
+    os.path.abspath(os.path.join(os.getcwd(), 'build')),
+    os.path.abspath(os.path.join(os.getcwd(), 'Relay', 'build')),
+]
+for p in candidate_build_paths:
+    if os.path.isfile(os.path.join(p, 'qt_version.py')):
+        sys.path.insert(0, p)
+        break
 import qt_version
 
 executePath = os.getcwd()
