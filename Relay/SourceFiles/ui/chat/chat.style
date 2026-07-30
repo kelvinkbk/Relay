@@ -433,8 +433,8 @@ historyInfoToast: Toast(defaultToast) {
 }
 historyInfoToastIcon: icon {{ "toast/info", toastFg }};
 
-bubbleRadiusSmall: relayRadius;
-bubbleRadiusLarge: relayMessageRadius;
+bubbleRadiusSmall: 6px;
+bubbleRadiusLarge: 16px;
 
 historyPhotoLeft: 14px;
 historyPhotoBubbleMinWidth: 200px;
