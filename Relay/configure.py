@@ -39,16 +39,20 @@ import run_cmake
 
 import pathlib
 for cmake_base in [os.path.abspath(os.path.join(scriptPath, '..', 'cmake')), os.path.abspath(os.path.join(scriptPath, 'cmake'))]:
-    kimage_cmake = pathlib.Path(cmake_base) / 'external' / 'qt' / 'qt_static_plugins' / 'kimageformats' / 'CMakeLists.txt'
-    if kimage_cmake.is_file():
+    qt_plugins_cmake = pathlib.Path(cmake_base) / 'external' / 'qt' / 'qt_static_plugins' / 'CMakeLists.txt'
+    if qt_plugins_cmake.is_file():
         try:
-            ktxt = kimage_cmake.read_text(encoding='utf-8')
-            if 'jxl.cpp' in ktxt:
-                ktxt = ktxt.replace('    jxl.cpp\n', '')
-                kimage_cmake.write_text(ktxt, encoding='utf-8')
-                print(f"[INFO] Patched {kimage_cmake} to remove jxl.cpp")
-        except Exception as ke:
-            print(f"[WARN] Failed patching kimageformats: {ke}")
+            ptxt = qt_plugins_cmake.read_text(encoding='utf-8')
+            target_str = 'add_checked_subdirectory(kimageformats)\ntarget_link_libraries(external_qt_static_plugins\nPUBLIC\n    desktop-app::external_qt_static_plugins_kimageformats\n)'
+            if target_str in ptxt and 'if (NOT WIN32)' not in ptxt:
+                ptxt = ptxt.replace(
+                    target_str,
+                    'if (NOT WIN32)\nadd_checked_subdirectory(kimageformats)\ntarget_link_libraries(external_qt_static_plugins\nPUBLIC\n    desktop-app::external_qt_static_plugins_kimageformats\n)\nendif()'
+                )
+                qt_plugins_cmake.write_text(ptxt, encoding='utf-8')
+                print(f"[INFO] Patched {qt_plugins_cmake} to skip kimageformats on Windows")
+        except Exception as pe:
+            print(f"[WARN] Failed patching qt_static_plugins: {pe}")
 
 candidate_build_paths = [
     os.path.abspath(os.path.join(scriptPath, 'build')),
