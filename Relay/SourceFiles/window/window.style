@@ -26,6 +26,11 @@ columnMaximalWidthThird: 392px;
 relayNavWidth: 70px;
 relayNavCollapsedWidth: 70px;
 
+relayRadius: 6px;
+relayMessageRadius: 16px;
+relayInputRadius: 18px;
+relayPanelRadius: 12px;
+
 relayNavChats: icon {{ "navigation/chats_default", menuIconFg }};
 relayNavChatsActive: icon {{ "navigation/chats_active", windowFgActive }};
 relayNavContacts: icon {{ "navigation/contacts_default", menuIconFg }};
