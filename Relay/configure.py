@@ -37,6 +37,19 @@ if not found_cmake:
 
 import run_cmake
 
+import pathlib
+for cmake_base in [os.path.abspath(os.path.join(scriptPath, '..', 'cmake')), os.path.abspath(os.path.join(scriptPath, 'cmake'))]:
+    kimage_cmake = pathlib.Path(cmake_base) / 'external' / 'qt' / 'qt_static_plugins' / 'kimageformats' / 'CMakeLists.txt'
+    if kimage_cmake.is_file():
+        try:
+            ktxt = kimage_cmake.read_text(encoding='utf-8')
+            if 'jxl.cpp' in ktxt:
+                ktxt = ktxt.replace('    jxl.cpp\n', '')
+                kimage_cmake.write_text(ktxt, encoding='utf-8')
+                print(f"[INFO] Patched {kimage_cmake} to remove jxl.cpp")
+        except Exception as ke:
+            print(f"[WARN] Failed patching kimageformats: {ke}")
+
 candidate_build_paths = [
     os.path.abspath(os.path.join(scriptPath, 'build')),
     os.path.abspath(os.path.join(scriptPath, '..', 'build')),
