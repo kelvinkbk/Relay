@@ -13,6 +13,7 @@
 #include "styles/style_dialogs.h"
 #include "styles/style_chat.h" // popupMenuExpandedSeparator
 #include "styles/style_menu_icons.h"
+#include "styles/style_boxes.h"
 #include "ui/widgets/popup_menu.h"
 #include "ui/widgets/menu/menu_add_action_callback_factory.h"
 #include "info/info_memento.h"
@@ -39,7 +40,7 @@ NavigationRail::NavigationRail(QWidget *parent, not_null<SessionController*> con
 	setupButtons();
 	
 	_controller->session().data().unreadBadgeChanges(
-	) | rpl::start_with_next([this] {
+	) | rpl::on_next([this] {
 		updateUnreadBadge();
 	}, _lifetime);
 
@@ -47,7 +48,7 @@ NavigationRail::NavigationRail(QWidget *parent, not_null<SessionController*> con
 		_controller->dialogsEntryStateCurrent()
 	) | rpl::then(
 		_controller->dialogsEntryStateValue()
-	) | rpl::start_with_next([this](const Dialogs::EntryState &state) {
+	) | rpl::on_next([this](const Dialogs::EntryState &state) {
 		if (state.key.folder() && state.key.folder()->id() == Data::Folder::kId) {
 			setActiveNavId(kArchiveId);
 		} else if (state.key.peer() == _controller->session().user()) {
@@ -163,13 +164,14 @@ void NavigationRail::showProfileMenu() {
 	if (Core::App().domain().accounts().size() > 1) {
 		_profileMenu->addSeparator();
 		for (const auto &[index, account] : Core::App().domain().accounts()) {
-			const auto isCurrent = (account == &controller->session().account());
-			const auto name = account->sessionExists()
-				? account->session().user()->name()
+			const auto rawAccount = account.get();
+			const auto isCurrent = (rawAccount == &controller->session().account());
+			const auto name = rawAccount->sessionExists()
+				? rawAccount->session().user()->name()
 				: QString("Account %1").arg(index);
 			_profileMenu->addAction(name, [=] {
 				if (!isCurrent) {
-					Core::App().domain().activate(account);
+					Core::App().domain().activate(rawAccount);
 				}
 			}, isCurrent ? &st::menuIconSavedMessages : nullptr); // check icon later
 		}
