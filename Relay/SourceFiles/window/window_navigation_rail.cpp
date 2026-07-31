@@ -99,7 +99,7 @@ void NavigationRail::setupButtons() {
 	connect(scCalls, &QShortcut::activated, [=] { handleClick(kCallsId); });
 
 	auto scCommand = new QShortcut(QKeySequence("Ctrl+K"), window());
-	connect(scCommand, &QShortcut::activated, [=] { _controller->showPeerHistory(_controller->session().userPeerId()); }); // Placeholder, or we can focus search.
+	connect(scCommand, &QShortcut::activated, [=] { _controller->show(PrepareContactsBox(_controller)); });
 }
 
 void NavigationRail::updateUnreadBadge() {
