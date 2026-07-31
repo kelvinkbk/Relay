@@ -176,9 +176,9 @@ void NavigationRail::showProfileMenu() {
 	}
 	
 	_profileMenu->addSeparator();
-	_profileMenu->addAction(tr::lng_mac_menu_add_account(tr::now), [=] {
-		controller->showAddAccount();
-	}, &st::menuIconAddMember);
+	_profileMenu->addAction(tr::lng_menu_add_account(tr::now), [=] {
+		Core::App().domain().addActivated(MTP::Environment{});
+	}, &st::menuIconAddAccount);
 	
 	_profileMenu->popup(QCursor::pos());
 }
