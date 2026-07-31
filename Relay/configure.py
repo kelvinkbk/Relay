@@ -54,6 +54,36 @@ for cmake_base in [os.path.abspath(os.path.join(scriptPath, '..', 'cmake')), os.
         except Exception as pe:
             print(f"[WARN] Failed patching qt_static_plugins: {pe}")
 
+    ffmpeg_cmake = pathlib.Path(cmake_base) / 'external' / 'ffmpeg' / 'CMakeLists.txt'
+    if ffmpeg_cmake.is_file():
+        try:
+            ftxt = ffmpeg_cmake.read_text(encoding='utf-8')
+            if 'dav1d_candidates' not in ftxt:
+                dav1d_block = '''file(GLOB dav1d_candidates
+    "${libs_loc}/local/lib/dav1d.lib"
+    "${libs_loc}/local/lib/libdav1d.a"
+    "${libs_loc}/dav1d/builddir-debug/src/dav1d.lib"
+    "${libs_loc}/dav1d/builddir-debug/src/libdav1d.a"
+    "${libs_loc}/dav1d/builddir-release/src/dav1d.lib"
+    "${libs_loc}/dav1d/builddir-release/src/libdav1d.a"
+    "${libs_loc}/dav1d/libdav1d.a"
+    "${libs_loc}/ffmpeg/libdav1d.a"
+    "${libs_loc}/libdav1d.a"
+    "${libs_loc}/dav1d.lib"
+)
+foreach(dav1d_lib ${dav1d_candidates})
+    if (EXISTS "${dav1d_lib}")
+        target_link_libraries(external_ffmpeg INTERFACE "${dav1d_lib}")
+        break()
+    endif()
+endforeach()
+'''
+                ftxt += '\n' + dav1d_block + '\n'
+                ffmpeg_cmake.write_text(ftxt, encoding='utf-8')
+                print(f"[INFO] Patched {ffmpeg_cmake} to link dav1d static library")
+        except Exception as fe:
+            print(f"[WARN] Failed patching ffmpeg CMakeLists: {fe}")
+
 candidate_build_paths = [
     os.path.abspath(os.path.join(scriptPath, 'build')),
     os.path.abspath(os.path.join(scriptPath, '..', 'build')),
