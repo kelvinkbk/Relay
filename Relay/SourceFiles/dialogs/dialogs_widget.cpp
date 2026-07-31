@@ -1671,8 +1671,8 @@ void Widget::setupMainMenuToggle() {
 	_mainMenu.under->show();
 
 	_newConversation->setClickedCallback([=] { showNewConversationMenu(); });
-	_newConversation->setIconOverride(&st::menuIconAddMember, &st::menuIconAddMember);
-	_newConversation->setAccessibleName(tr::lng_mac_menu_new_messages(tr::now));
+	_newConversation->setIconOverride(&st::menuIconProfile, &st::menuIconProfile);
+	_newConversation->setAccessibleName(tr::lng_menu_contacts(tr::now));
 	_newConversation->show();
 
 	rpl::single(rpl::empty) | rpl::then(
@@ -1709,7 +1709,7 @@ void Widget::showNewConversationMenu() {
 		this,
 		st::popupMenuExpandedSeparator);
 
-	_newConversationMenu->addAction(tr::lng_mac_menu_new_messages(tr::now), [=] {
+	_newConversationMenu->addAction(tr::lng_menu_contacts(tr::now), [=] {
 		controller()->show(PrepareContactsBox(controller()));
 	}, &st::menuIconProfile);
 

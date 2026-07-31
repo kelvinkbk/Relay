@@ -8,6 +8,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "settings/sections/settings_main.h"
 
 #include <QtWidgets/QAction>
+#include "window/themes/window_theme.h"
+#include "styles/style_menu_icons.h"
 
 #include "settings/settings_common_session.h"
 
@@ -654,9 +656,6 @@ Main::Main(
 rpl::producer<QString> Main::title() {
 	return tr::lng_menu_settings();
 }
-
-#include "window/themes/window_theme.h"
-#include "styles/style_menu_icons.h"
 
 void Main::fillTopBarMenu(const Ui::Menu::MenuCallback &addAction) {
 	const auto &list = Core::App().domain().accounts();
