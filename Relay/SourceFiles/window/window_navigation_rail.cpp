@@ -217,10 +217,15 @@ void NavigationRail::paintEvent(QPaintEvent *e) {
 	for (auto &b : _buttons) {
 		if (b.id == _activeNavId) {
 			auto rect = b.button->geometry();
-			rect.adjust(-5, -5, 5, 5);
+			rect.adjust(-6, -4, 6, 4);
 			p.setBrush(st::dialogsBgActive);
 			p.setPen(Qt::NoPen);
 			p.drawRoundedRect(rect, st::relayPanelRadius, st::relayPanelRadius);
+
+			// Modern left accent bar
+			auto indicatorRect = QRect(2, rect.y() + 6, 4, rect.height() - 12);
+			p.setBrush(st::windowActiveTextFg);
+			p.drawRoundedRect(indicatorRect, 2, 2);
 		}
 	}
 }
