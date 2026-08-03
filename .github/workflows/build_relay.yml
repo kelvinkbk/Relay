@@ -35,7 +35,7 @@ jobs:
 
       - name: Cache Build Dependencies
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ../Libraries/win64/local
           key: relay-deps-win64-v1-${{ hashFiles('Relay/build/prepare/prepare.py', 'Relay/build/prepare/third_party.py') }}
