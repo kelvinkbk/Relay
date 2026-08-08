@@ -1,5 +1,5 @@
-#define MyAppShortName "Telegram"
-#define MyAppName "Telegram Desktop"
+#define MyAppShortName "Relay"
+#define MyAppName "Relay Desktop"
 #define MyAppPublisher "Telegram FZ-LLC"
 #define MyAppURL "https://desktop.telegram.org"
 #define MyAppExeName "Telegram.exe"
@@ -19,11 +19,11 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={userappdata}\{#MyAppName}
-DefaultGroupName={#MyAppName}
+DefaultGroupName={#MyAppShortName}
 AllowNoIcons=yes
 OutputDir={#ReleasePath}
 SetupIconFile={#SourcePath}..\Resources\art\icon256.ico
-UninstallDisplayName={#MyAppName}
+UninstallDisplayName={#MyAppShortName}
 UninstallDisplayIcon={app}\Telegram.exe
 Compression=lzma
 SolidCompression=yes
