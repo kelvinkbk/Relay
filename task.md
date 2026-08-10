@@ -12,6 +12,15 @@ Steps:
 6. Update `RELAY_BUILD_STATUS.md` with results and paste logs.
 7. If any compatibility regressions found (e.g., missing Updater, renamed internal files), stop and open an issue for migration planning.
 
+Latest CI rerun result:
+
+- Run: [31267417903](https://github.com/kelvinkbk/Relay/actions/runs/31267417903)
+- Branch: `ci-rerun-716cefb4e0`
+- Outcome: FAILED during CMake configure, not during dav1d fetch.
+- Exact failure: missing `Relay/ThirdParty/MicroTeX/res/bundled.qrc` from `cmake/external/microtex/CMakeLists.txt`.
+- Cache: miss.
+- Submodule warning: `cmake` checkout warned about `not our ref a5bb7c5a86e3d0616984f7f6eaee359fdbd9bb5a`, but checkout completed.
+
 Notes:
 
 - Do NOT commit or push packaging fixes automatically; review results first.
