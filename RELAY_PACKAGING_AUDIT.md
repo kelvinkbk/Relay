@@ -126,4 +126,15 @@ Action items for CI run (do not run here):
 2. Collect build logs and artifact names and paste them under `RELAY_BUILD_STATUS.md`.
 3. Perform installer verification on a clean Windows VM and record runtime checks in `RELAY_BUILD_STATUS.md`.
 
-Status: PHASE C.6 — BUILD & INSTALLER VERIFICATION PENDING (NO CI RUN HERE).
+Status: BUILD: PENDING — latest CI blocked at CMake configuration
+
+## Phase 6 — Relay Runtime Polish Verification Status
+
+- BUILD: PENDING — latest CI blocked at CMake configuration
+- EXECUTABLE: NOT VERIFIED FOR CURRENT PHASE 6 SOURCE
+- RUNTIME: PREVIOUS BUILD VERIFIED, CURRENT SOURCE NOT YET VERIFIED
+
+Distinct States:
+- A) PREVIOUS WORKING BUILD: Executable verified running.
+- B) CURRENT PHASE 6 SOURCE: Local source polish applied (QR text/color, neutral wallpaper, outbox bubble color, expanded profile menu, duplicate night mode removal).
+- C) LATEST CI FAILURE: CI run ID 31267417903 (branch `ci-rerun-716cefb4e0`) failed at CMake configure (`Cannot find source file: .../ThirdParty/MicroTeX/res/bundled.qrc`). No Relay.exe produced for current source yet.

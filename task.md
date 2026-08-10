@@ -1,27 +1,14 @@
-# Task: Phase C.6 — Build, Installer, Runtime Verification
+# Task: Phase 6 — Relay Runtime Polish
 
-Owner: (assign to a human operator)
+- BUILD: PENDING — latest CI blocked at CMake configuration
+- EXECUTABLE: NOT VERIFIED FOR CURRENT PHASE 6 SOURCE
+- RUNTIME: PREVIOUS BUILD VERIFIED, CURRENT SOURCE NOT YET VERIFIED
 
-Steps:
-
-1. Trigger Windows CI (or run `build\build.bat` locally).
-2. Collect build logs and confirm `Relay.exe` produced.
-3. Retrieve installer artifact (`tsetup*.exe`) and run on a clean Windows VM.
-4. Verify Start Menu/Desktop/uninstall entries display `Relay`/`Relay Desktop`.
-5. Launch app and run runtime checklist (navigation, chats, settings, send/receive).
-6. Update `RELAY_BUILD_STATUS.md` with results and paste logs.
-7. If any compatibility regressions found (e.g., missing Updater, renamed internal files), stop and open an issue for migration planning.
-
-Latest CI rerun result:
-
-- Run: [31267417903](https://github.com/kelvinkbk/Relay/actions/runs/31267417903)
-- Branch: `ci-rerun-716cefb4e0`
-- Outcome: FAILED during CMake configure, not during dav1d fetch.
-- Exact failure: missing `Relay/ThirdParty/MicroTeX/res/bundled.qrc` from `cmake/external/microtex/CMakeLists.txt`.
-- Cache: miss.
-- Submodule warning: `cmake` checkout warned about `not our ref a5bb7c5a86e3d0616984f7f6eaee359fdbd9bb5a`, but checkout completed.
-
-Notes:
-
-- Do NOT commit or push packaging fixes automatically; review results first.
-- If installer or build fails, capture logs and attach to the task.
+Phase 6 Progress Checklist:
+- [x] Login / Auth UI wording & QR accent color updated (#6366F1, "Scan from your phone", "Open your mobile app").
+- [x] Chat Wallpaper Telegram doodle pattern removed and replaced with Relay neutral surface gradient.
+- [x] Outgoing message bubble updated to #EEF0FF. Default embedded accent colors updated to #6366F1.
+- [x] Navigation Rail active indicators, alignment, spacing, badges, and profile menu verified. Profile menu expanded with Profile, Edit Profile, Account switching, Add Account, Settings, and Sign out.
+- [x] New Conversation [+] action verified using existing Telegram controllers (New Message, New Group, New Channel).
+- [x] Settings section verified and duplicate Night Mode entry outside Settings > Appearance removed.
+- [x] Documentation status corrected to differentiate previous build verification vs current source pending build.

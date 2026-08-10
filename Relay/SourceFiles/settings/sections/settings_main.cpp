@@ -671,10 +671,6 @@ void Main::fillTopBarMenu(const Ui::Menu::MenuCallback &addAction) {
 			[=] { showOther(InformationId()); },
 			&st::menuIconEdit);
 	}
-	addAction(
-		tr::lng_settings_theme_night(tr::now),
-		[=] { Window::Theme::ToggleNightMode(); },
-		&st::menuIconNightMode);
 
 	const auto window = &controller()->window();
 	const auto logout = addAction({

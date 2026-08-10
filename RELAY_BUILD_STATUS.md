@@ -4,13 +4,20 @@ This file records the CI/build/installer/runtime verification results for Phase 
 
 STATUS SUMMARY
 
-- CI run: FAILED
-- CI run ID: 31267417903
-- CI branch: ci-rerun-716cefb4e0
-- CI commit: e1f8595a6e
-- Build result: FAILED (CMake configure failure)
-- Installer result: NOT PRODUCED
-- Runtime verification: NOT RUN
+- BUILD: PENDING — Workflow fix applied, CI rerun pending
+- EXECUTABLE: NOT VERIFIED FOR CURRENT PHASE 6 SOURCE
+- RUNTIME: PREVIOUS BUILD VERIFIED, CURRENT SOURCE NOT YET VERIFIED
+- Phase: Phase 6 — Relay Runtime Polish
+
+WORKFLOW FIX & DIAGNOSIS:
+- Diagnosis Confirmed: `Relay/ThirdParty/MicroTeX/res/bundled.qrc` exists locally on superproject-recorded commit `674ef54b5113e6ab73f1afbcae97de8287d8466d`. CI run `31267417903` attempted a fallback checkout following a `cmake` submodule warning, silently switching `MicroTeX` to upstream `master` commit `0e3707f6dafebb121d98b53c64364d16fefe481d` (which lacks `res/bundled.qrc`).
+- Workflow Fix Applied: `.github/workflows/build_relay.yml` updated with `submodules: recursive` and explicit `--checkout` / commit verification to ensure `MicroTeX` strictly checks out `674ef54b5113e6ab73f1afbcae97de8287d8466d`.
+- CI Rerun Status: Pending trigger & execution.
+
+DISTINCTION OF STATES:
+- A) PREVIOUS WORKING BUILD: Verified running executable (login UI, QR auth, chat list, navigation rail, profile avatar, messenger UI launched successfully).
+- B) CURRENT PHASE 6 SOURCE: Local source polish applied (QR text/color, neutral wallpaper, outbox bubble color, expanded profile menu, duplicate night mode removal).
+- C) LATEST CI FAILURE: Run 31267417903 failed at CMake configure (`res/bundled.qrc` missing due to submodule revision drift). Fixed in workflow, rerun pending.
 
 ARTIFACTS (expected)
 

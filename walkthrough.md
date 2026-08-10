@@ -32,10 +32,15 @@ call build\build.bat
 
 6. Record findings in `RELAY_BUILD_STATUS.md` and update `RELAY_PACKAGING_AUDIT.md` as needed.
 
-Latest CI rerun result:
+## Phase 6 — Relay Runtime Polish Status
 
-- Workflow run: [31267417903](https://github.com/kelvinkbk/Relay/actions/runs/31267417903)
-- Branch: `ci-rerun-716cefb4e0`
-- Outcome: dependency preparation completed, but CMake generation failed in `cmake/external/microtex/CMakeLists.txt` because `Relay/ThirdParty/MicroTeX/res/bundled.qrc` was missing.
-- Dependency cache status: miss.
-- Submodule warning: `cmake` submodule checkout reported `not our ref a5bb7c5a86e3d0616984f7f6eaee359fdbd9bb5a`, but checkout continued.
+- BUILD: PENDING — latest CI blocked at CMake configuration
+- EXECUTABLE: NOT VERIFIED FOR CURRENT PHASE 6 SOURCE
+- RUNTIME: PREVIOUS BUILD VERIFIED, CURRENT SOURCE NOT YET VERIFIED
+
+Summary of Phase 6 local source polish applied:
+1. **Login UI**: Replaced "Scan From Mobile Relay" / "Open Relay on your phone" with "Scan from your phone" / "Open your mobile app". Updated QR accent color to Relay Primary Indigo (`#6366F1`).
+2. **Chat Wallpaper**: Removed Telegram doodle pattern (`background.tgv`) loading in `window_theme.cpp` and `window_theme_preview.cpp`. Configured neutral surface gradient (`#F5F6F8`, `#EBEDF0`) in `data_wall_paper.cpp`.
+3. **Relay Colors**: Updated `msgOutBg` to `#EEF0FF` in `colors.palette` and updated embedded scheme accent color to `#6366F1` in `window_themes_embedded.cpp`.
+4. **Navigation Rail & Profile**: Expanded profile menu in `window_navigation_rail.cpp` to expose Profile, Edit Profile, Settings, Account switching, Add Account, and Sign out.
+5. **Settings**: Removed duplicate Night Mode entry in `settings_main.cpp` outside of `Settings > Appearance`.

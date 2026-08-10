@@ -392,8 +392,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 "lng_photo_caption" = "Caption";
 "lng_photos_comment" = "Comment";
 
-"lng_intro_qr_title" = "Scan From Mobile Relay";
-"lng_intro_qr_step1" = "Open Relay on your phone";
+"lng_intro_qr_title" = "Scan from your phone";
+"lng_intro_qr_step1" = "Open your mobile app";
 "lng_intro_qr_step2" = "Go to Settings > Devices > Link Desktop Device";
 "lng_intro_qr_step3" = "Scan this image to Log In";
 "lng_intro_qr_skip" = "Or log in using your phone number";

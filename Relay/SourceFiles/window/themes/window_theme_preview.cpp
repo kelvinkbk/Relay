@@ -466,17 +466,7 @@ void Generator::paintHistoryBackground() {
 	if (background.isNull()) {
 		const auto fakePaper = Data::WallPaper(_current.backgroundId);
 		if (Data::IsThemeWallPaper(fakePaper)) {
-			background = Ui::ReadBackgroundImage(
-				u":/gui/art/background.tgv"_q,
-				QByteArray(),
-				true
-			).image;
-			const auto paper = Data::DefaultWallPaper();
-			background = Ui::PreparePatternImage(
-				std::move(background),
-				paper.backgroundColors(),
-				paper.gradientRotation(),
-				paper.patternOpacity());
+			background = QImage();
 			tiled = false;
 		} else {
 			background = std::move(_current.backgroundImage);

@@ -231,3 +231,24 @@ Verification steps performed:
 3. Created `RELAY_PACKAGING_AUDIT.md` to record packaging/build artifacts for a future packaging audit (no build scripts modified in this phase).
 
 Status: SAFE PATCH COMPLETE — the runtime branding edits above have been applied locally. See `RELAY_PACKAGING_AUDIT.md` for packaging items recorded.
+
+## Phase 6 — Relay Runtime Polish Status
+
+BUILD: PENDING — latest CI blocked at CMake configuration
+EXECUTABLE: NOT VERIFIED FOR CURRENT PHASE 6 SOURCE
+RUNTIME: PREVIOUS BUILD VERIFIED, CURRENT SOURCE NOT YET VERIFIED
+
+Summary of runtime branding and UI polish applied locally:
+1. LOGIN / AUTH UI:
+   - Updated `lang.strings` to replace "Scan From Mobile Relay" with "Scan from your phone" and "Open Relay on your phone" with "Open your mobile app".
+   - Updated `QrActiveColor()` in `intro_qr.cpp` to Relay Primary Indigo (`#6366F1`).
+2. CHAT WALLPAPER:
+   - Removed Telegram doodle pattern (`background.tgv`) loading in `window_theme.cpp` and `window_theme_preview.cpp`.
+   - Updated `WallPaper::ConstructDefault()` in `data_wall_paper.cpp` to use Relay neutral light surface colors (`#F5F6F8`, `#EBEDF0`).
+3. RELAY COLORS:
+   - Outbox message bubble (`msgOutBg`) updated to `#EEF0FF` in `colors.palette`.
+   - Embedded scheme accent colors updated to `#6366F1` in `window_themes_embedded.cpp`.
+4. NAVIGATION RAIL & PROFILE MENU:
+   - Expanded profile avatar menu in `window_navigation_rail.cpp` to expose Profile, Edit Profile, Settings, Account switching, Add Account, and Sign out.
+5. SETTINGS:
+   - Removed duplicate Night Mode entry in `settings_main.cpp` outside of `Settings > Appearance`.

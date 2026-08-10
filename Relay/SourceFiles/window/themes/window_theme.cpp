@@ -72,11 +72,7 @@ inline bool AreTestingTheme() {
 }
 
 [[nodiscard]] QImage ReadDefaultImage() {
-	return Ui::ReadBackgroundImage(
-		u":/gui/art/background.tgv"_q,
-		QByteArray(),
-		true
-	).image;
+	return QImage();
 }
 
 [[nodiscard]] bool GoodImageFormatAndSize(const QImage &image) {

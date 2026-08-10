@@ -24,6 +24,9 @@
 #include <QKeySequence>
 #include "lang/lang_keys.h"
 
+#include "settings/sections/settings_information.h"
+#include "window/window_controller.h"
+
 namespace Window {
 
 namespace {
@@ -157,6 +160,10 @@ void NavigationRail::showProfileMenu() {
 		controller->showPeerInfo(controller->session().user());
 	}, &st::menuIconProfile);
 
+	_profileMenu->addAction(tr::lng_settings_information(tr::now), [=] {
+		controller->showSettings(::Settings::InformationId());
+	}, &st::menuIconEdit);
+
 	_profileMenu->addAction(tr::lng_menu_settings(tr::now), [=] {
 		controller->showSettings();
 	}, &st::menuIconSettings);
@@ -173,7 +180,7 @@ void NavigationRail::showProfileMenu() {
 				if (!isCurrent) {
 					Core::App().domain().activate(rawAccount);
 				}
-			}, isCurrent ? &st::menuIconSavedMessages : nullptr); // check icon later
+			}, isCurrent ? &st::menuIconSavedMessages : nullptr);
 		}
 	}
 	
@@ -181,6 +188,11 @@ void NavigationRail::showProfileMenu() {
 	_profileMenu->addAction(tr::lng_menu_add_account(tr::now), [=] {
 		Core::App().domain().addActivated(MTP::Environment{});
 	}, &st::menuIconAddAccount);
+
+	_profileMenu->addSeparator();
+	_profileMenu->addAction(tr::lng_settings_logout(tr::now), [=] {
+		controller->window().showLogoutConfirmation();
+	}, &st::menuIconLeaveAttention);
 	
 	_profileMenu->popup(QCursor::pos());
 }

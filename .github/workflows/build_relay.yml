@@ -21,12 +21,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: recursive
 
       - name: Checkout Submodules
         shell: cmd
         run: |
           git submodule sync --recursive
-          git submodule update --init --recursive
+          git submodule update --init --checkout --recursive
+          git -C Relay/ThirdParty/MicroTeX checkout 674ef54b5113e6ab73f1afbcae97de8287d8466d
           # Verify submodule commit for MicroTeX matches expected
           git -C Relay/ThirdParty/MicroTeX rev-parse --verify HEAD
 

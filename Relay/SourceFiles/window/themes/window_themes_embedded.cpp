@@ -246,7 +246,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			qColor("ffffff"),
 			name(tr::lng_settings_theme_classic),
 			QString(),
-			qColor("40a7e3")
+			qColor("6366f1")
 		},
 		EmbeddedScheme{
 			EmbeddedType::DayBlue,
@@ -257,7 +257,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			qColor("ffffff"),
 			name(tr::lng_settings_theme_day),
 			":/gui/day-blue.tdesktop-theme",
-			qColor("40a7e3")
+			qColor("6366f1")
 		},
 		EmbeddedScheme{
 			EmbeddedType::Night,
@@ -268,7 +268,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			qColor("5ca7d4"),
 			name(tr::lng_settings_theme_tinted),
 			":/gui/night.tdesktop-theme",
-			qColor("5288c1")
+			qColor("6366f1")
 		},
 		EmbeddedScheme{
 			EmbeddedType::NightGreen,
@@ -279,7 +279,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			qColor("75bfb5"),
 			name(tr::lng_settings_theme_night),
 			":/gui/night-green.tdesktop-theme",
-			qColor("3fc1b0")
+			qColor("6366f1")
 		},
 	};
 }
