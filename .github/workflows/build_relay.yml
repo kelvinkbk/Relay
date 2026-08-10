@@ -26,7 +26,9 @@ jobs:
         shell: cmd
         run: |
           git submodule sync --recursive
-          git submodule update --init --recursive --force || git submodule update --init --recursive --remote --force
+          git submodule update --init --recursive
+          # Verify submodule commit for MicroTeX matches expected
+          git -C Relay/ThirdParty/MicroTeX rev-parse --verify HEAD
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
